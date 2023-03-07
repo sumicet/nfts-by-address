@@ -19,4 +19,10 @@ export const textStyles = {
         lineHeight: '20px',
         fontWeight: 400,
     }),
+    small: defineStyle({
+        fontFamily: 'readexPro',
+        fontSize: '0.875rem',
+        lineHeight: '1.0625rem',
+        fontWeight: 500,
+    }),
 };

@@ -1,5 +1,4 @@
 import { defineStyleConfig } from '@chakra-ui/styled-system';
-import { textStyles } from '../foundations/textStyles';
 
 export const Button = defineStyleConfig({
     baseStyle: {

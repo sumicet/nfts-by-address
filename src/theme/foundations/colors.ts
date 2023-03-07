@@ -6,8 +6,9 @@ export const colors = {
     card: {
         light: 'rgb(238, 241, 247)',
         dark: 'rgb(19, 24, 32)',
-        darkGradient: 'linear-gradient(rgba(19, 24, 32, 0) 0%, rgb(35, 43, 57) 100%)',
-        lightGradient: 'linear-gradient(rgb(238, 241, 247) 0%, rgb(220, 212, 198) 100%)',
+        gradient: {
+            dark: 'linear-gradient(rgba(19, 24, 32, 0) 0%, rgb(35, 43, 57) 100%)',
+        },
     },
     text: {
         primary: {
@@ -31,4 +32,5 @@ export const colors = {
         light: '#c42d50',
         dark: '#c42d50',
     },
+    gold: 'rgb(240, 185, 11)',
 };
