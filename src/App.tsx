@@ -1,4 +1,4 @@
-import { VStack, Text, Box, AspectRatio } from '@chakra-ui/layout';
+import { VStack, Text, Box } from '@chakra-ui/layout';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { getNfts } from '@/utils';

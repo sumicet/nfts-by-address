@@ -7,3 +7,4 @@ TODO convert properly
 TODO add error states
 TODO collection image null
 TODO grid skeletons - fix the grid bug
+TODO add footer

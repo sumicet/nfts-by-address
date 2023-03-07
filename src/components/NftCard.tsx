@@ -2,9 +2,9 @@ import { type Asset } from '@/types';
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/system';
 import { Icon } from './Icon';
-import convert from 'ether-converter';
 import { NftImage } from './NftImage';
 import placeholder from '@/assets/images/placeholder.png';
+import { weiToEth } from '@/utils';
 
 export function NftCard({
     image_thumbnail_url,
@@ -18,11 +18,7 @@ export function NftCard({
     const bgColor = useColorModeValue('card.light', 'card.dark');
     const outlineColor = useColorModeValue('outline.light', 'outline.dark');
 
-    // Bad conversion, no bueno for production
-    // Should've converted to USD but was too lazy
-    const lowestPrice = seaport_sell_orders?.[0].current_price
-        ? (convert(seaport_sell_orders[0].current_price, 'wei', 'ether') as string)
-        : '0';
+    const lowestPrice = weiToEth(seaport_sell_orders?.[0].current_price);
     const listingCount = seaport_sell_orders?.length;
 
     return (

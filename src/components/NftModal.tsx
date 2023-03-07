@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/modal';
 import { useColorModeValue } from '@chakra-ui/system';
 import { Image } from './Image';
-import convert from 'ether-converter';
 import { Icon } from './Icon';
 import { NftImage } from './NftImage';
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import { hideScrollbar } from '@/theme';
 import placeholder from '@/assets/images/placeholder.png';
+import { weiToEth } from '@/utils';
 
 interface NftModalProps extends Pick<ModalProps, 'isOpen' | 'onClose'>, Asset {}
 
@@ -41,11 +41,8 @@ export function NftModal({
         'background.primary.light',
         'background.primary.dark'
     );
-    // Bad conversion, no bueno for production
-    // Should've converted to USD but was too lazy
-    const lowestPrice = seaport_sell_orders?.[0].current_price
-        ? (convert(seaport_sell_orders[0].current_price, 'wei', 'ether') as string)
-        : '0';
+
+    const lowestPrice = weiToEth(seaport_sell_orders?.[0].current_price);
     const listingCount = seaport_sell_orders?.length;
 
     const preserveScrollBarGap = useBreakpointValue({ base: false, sm: true }, { ssr: false });
