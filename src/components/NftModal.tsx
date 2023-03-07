@@ -1,7 +1,7 @@
 import { type Asset } from '@/types';
 import { Button } from '@chakra-ui/button';
-import { Box, HStack, Link, Text, VStack } from '@chakra-ui/layout';
-import { type ModalProps } from '@chakra-ui/modal';
+import { AspectRatio, Box, HStack, Link, Text, VStack } from '@chakra-ui/layout';
+import { ModalFooter, type ModalProps } from '@chakra-ui/modal';
 import {
     Modal,
     ModalOverlay,
@@ -15,6 +15,8 @@ import { Image } from './Image';
 import convert from 'ether-converter';
 import { Icon } from './Icon';
 import { NftImage } from './NftImage';
+import { useBreakpointValue } from '@chakra-ui/media-query';
+import { hideScrollbar } from '@/theme';
 
 interface NftModalProps extends Pick<ModalProps, 'isOpen' | 'onClose'>, Asset {}
 
@@ -38,7 +40,6 @@ export function NftModal({
         'background.primary.light',
         'background.primary.dark'
     );
-
     // Bad conversion, no bueno for production
     // Should've converted to USD but was too lazy
     const lowestPrice = seaport_sell_orders?.[0].current_price
@@ -59,29 +60,45 @@ export function NftModal({
         ...rest,
     });
 
+    const preserveScrollBarGap = useBreakpointValue({ base: false, sm: true }, { ssr: false });
+
     return (
-        <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount>
+        <Modal
+            preserveScrollBarGap={preserveScrollBarGap} // This prop doesn't seem to be responsive
+            isOpen={isOpen}
+            onClose={onClose}
+            isCentered
+            blockScrollOnMount
+            size={{ base: 'fullscreen', sm: '500' }}
+        >
             <ModalOverlay />
-            <ModalContent maxWidth={500 + 24 * 2}>
-                <ModalHeader justifyContent="flex-end" display="flex">
+            <ModalContent
+                display="flex"
+                maxHeight={{ base: '100%', sm: '70vh' }}
+                sx={hideScrollbar}
+                overflowY="scroll"
+                // position="relative"
+            >
+                <ModalHeader justifyContent="flex-end" display="flex" position="sticky" top={0}>
                     <ModalCloseButton />
                 </ModalHeader>
 
-                <ModalBody>
-                    <VStack spacing="space14" alignItems="flex-start">
-                        <Box borderRadius="radius16" overflow="hidden">
-                            <NftImage
-                                src={image_thumbnail_url}
-                                fallback={collection.image_url}
-                                boxSize={500}
-                            />
+                <ModalBody flex={1}>
+                    <VStack spacing="space14" alignItems="flex-start" boxSize="100%">
+                        <Box width="100%">
+                            <AspectRatio
+                                ratio={1}
+                                minWidth="100%"
+                                borderRadius="radius16"
+                                overflow="hidden"
+                            >
+                                <NftImage
+                                    src={image_thumbnail_url}
+                                    fallback={collection.image_url}
+                                />
+                            </AspectRatio>
                         </Box>
-                        <Text
-                            variant="subtitle"
-                            color={textPrimaryColor}
-                            noOfLines={2}
-                            wordBreak="break-all"
-                        >
+                        <Text variant="subtitle" color={textPrimaryColor}>
                             {name || `#${token_id}`}
                         </Text>
                         <Link href={`https://opensea.io/collection/${collection.slug}`} isExternal>
@@ -100,12 +117,7 @@ export function NftModal({
                                     boxSize={30}
                                     borderRadius="100%"
                                 />
-                                <Text
-                                    variant="body"
-                                    color={textSecondaryColor}
-                                    noOfLines={1}
-                                    wordBreak="break-all"
-                                >
+                                <Text variant="body" color={textSecondaryColor}>
                                     {collection.name}
                                 </Text>
                                 {collection.safelist_request_status === 'verified' && (
@@ -114,32 +126,28 @@ export function NftModal({
                             </HStack>
                         </Link>
                         {description && (
-                            <Text
-                                variant="body"
-                                color={textSecondaryColor}
-                                noOfLines={6}
-                                wordBreak="break-all"
-                            >
+                            <Text variant="body" color={textSecondaryColor}>
                                 {description}
                             </Text>
                         )}
-
-                        <HStack width="100%" justifyContent="flex-end" spacing="space24">
-                            {listingCount && (
-                                <Text variant="body" color="gold">
-                                    {lowestPrice} ETH
-                                </Text>
-                            )}
-                            <Link href={permalink} isExternal>
-                                {listingCount ? (
-                                    <Button>Buy on Opensea</Button>
-                                ) : (
-                                    <Button>View on Opensea</Button>
-                                )}
-                            </Link>
-                        </HStack>
                     </VStack>
                 </ModalBody>
+                <ModalFooter height="fit-content" position="sticky" bottom={0}>
+                    <HStack width="100%" justifyContent="flex-end" spacing="space24">
+                        {listingCount && (
+                            <Text variant="body" color="gold">
+                                {lowestPrice} ETH
+                            </Text>
+                        )}
+                        <Link href={permalink} isExternal>
+                            {listingCount ? (
+                                <Button>Buy on Opensea</Button>
+                            ) : (
+                                <Button>View on Opensea</Button>
+                            )}
+                        </Link>
+                    </HStack>
+                </ModalFooter>
             </ModalContent>
         </Modal>
     );

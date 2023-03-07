@@ -18,14 +18,18 @@ const baseStyle = definePartsStyle((props) => ({
         width: 'fit-content',
         background: mode('background.secondary.light', 'background.secondary.dark')(props),
         borderRadius: 'radius20',
-        paddingTop: 'space30',
+        maxWidth: 500,
     },
     body: {
-        padding: 'space24',
+        paddingX: 'space24',
     },
     header: {
+        paddingTop: 'space30',
+        paddingBottom: 'space24',
         color: mode('text.primary.light', 'text.primary.dark')(props),
         paddingX: 'space24',
+        background: mode('background.secondary.light', 'background.secondary.dark')(props),
+        zIndex: 1,
     },
     overlay: {
         bgColor: 'overlay',
@@ -34,6 +38,29 @@ const baseStyle = definePartsStyle((props) => ({
     closeButton: {
         color: mode('text.secondary.light', 'text.secondary.dark')(props),
     },
+    footer: {
+        width: '100%',
+        padding: 'space24',
+        background: mode('background.secondary.light', 'background.secondary.dark')(props),
+    },
 }));
 
-export const Modal = defineMultiStyleConfig({ baseStyle });
+export const Modal = defineMultiStyleConfig({
+    baseStyle,
+    sizes: {
+        fullscreen: {
+            dialog: {
+                width: '100%',
+                height: '100%',
+                borderRadius: 0,
+                maxWidth: '100%',
+                maxHeight: '100vh',
+            },
+        },
+        500: {
+            dialog: {
+                width: 500,
+            },
+        },
+    },
+});

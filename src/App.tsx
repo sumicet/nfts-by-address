@@ -1,4 +1,4 @@
-import { VStack, Text, Box } from '@chakra-ui/layout';
+import { VStack, Text, Box, AspectRatio } from '@chakra-ui/layout';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { getNfts } from '@/utils';
@@ -41,7 +41,7 @@ function App() {
         <>
             {selectedNft && <NftModal {...selectedNft} isOpen={isOpen} onClose={onClose} />}
             <VStack width="100%" spacing="space40">
-                <Text variant="title" textAlign="center">
+                <Text variant={{ base: 'subtitle', md: 'title' }} textAlign="center">
                     Wallet-Owned NFTs At Your Sausage Fingertips
                 </Text>
                 <Input
