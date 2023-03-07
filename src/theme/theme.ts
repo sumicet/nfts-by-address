@@ -5,7 +5,7 @@ import { foundations } from './foundations';
 const config: ThemeConfig = {
     useSystemColorMode: true,
     initialColorMode: 'dark',
-    cssVarPrefix: 'your-prefix',
+    cssVarPrefix: 'nfts-by-address',
 };
 
 export const theme = {
