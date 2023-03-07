@@ -2,3 +2,7 @@
 
 <!-- TODO process videos -->
 TODO add transitions
+TODO add skeletons
+TODO convert properly
+TODO add error states
+TODO collection image null

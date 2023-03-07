@@ -4,6 +4,7 @@ import { useColorModeValue } from '@chakra-ui/system';
 import { Icon } from './Icon';
 import convert from 'ether-converter';
 import { NftImage } from './NftImage';
+import placeholder from '@/assets/images/placeholder.png';
 
 export function NftCard({
     image_thumbnail_url,
@@ -56,7 +57,7 @@ export function NftCard({
                 height={320}
                 width="100%"
                 src={image_thumbnail_url}
-                fallback={collection.image_url}
+                fallback={collection.image_url || placeholder}
                 borderRadius="radius32"
             />
             <VStack spacing="space12" alignItems="flex-start" paddingX="space8">

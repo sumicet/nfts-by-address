@@ -17,6 +17,7 @@ import { Icon } from './Icon';
 import { NftImage } from './NftImage';
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import { hideScrollbar } from '@/theme';
+import placeholder from '@/assets/images/placeholder.png';
 
 interface NftModalProps extends Pick<ModalProps, 'isOpen' | 'onClose'>, Asset {}
 
@@ -46,19 +47,6 @@ export function NftModal({
         ? (convert(seaport_sell_orders[0].current_price, 'wei', 'ether') as string)
         : '0';
     const listingCount = seaport_sell_orders?.length;
-
-    console.log({
-        isOpen,
-        onClose,
-        name,
-        image_preview_url,
-        image_thumbnail_url,
-        description,
-        seaport_sell_orders,
-        permalink,
-        collection,
-        ...rest,
-    });
 
     const preserveScrollBarGap = useBreakpointValue({ base: false, sm: true }, { ssr: false });
 
@@ -113,7 +101,7 @@ export function NftModal({
                                 borderRadius="radius16"
                             >
                                 <Image
-                                    src={collection.image_url}
+                                    src={collection.image_url || placeholder}
                                     boxSize={30}
                                     borderRadius="100%"
                                 />
