@@ -5,6 +5,7 @@ export const getNfts = async (address: string, cursor?: string) => {
     const params = new URLSearchParams();
     params.append('owner', address);
     params.append('limit', '20');
+    params.append('include_orders', 'true');
     if (cursor) {
         params.append('cursor', cursor);
     }

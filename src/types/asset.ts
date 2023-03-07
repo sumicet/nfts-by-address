@@ -6,4 +6,9 @@ export interface Asset {
     image_original_url: string;
     name: string;
     permalink: string; // Link to Opensea
+    seaport_sell_orders: Array<{ current_price: string }> | null;
+    collection: {
+        name: string;
+        safelist_request_status: 'verified' | 'not_requested' | 'disabled_top_trending';
+    };
 }

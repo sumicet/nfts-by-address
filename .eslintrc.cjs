@@ -35,6 +35,7 @@ module.exports = {
         '@typescript-eslint/prefer-nullish-coalescing': 'off',
         '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/promise-function-async': 'off',
+        '@typescript-eslint/naming-convention': 'off',
     },
     ignorePatterns: ['node_modules/', 'dist/', 'build/', '**.d.ts', '**.config.ts'],
     settings: {

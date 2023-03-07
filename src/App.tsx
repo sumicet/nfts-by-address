@@ -3,7 +3,8 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { getNfts } from '@/utils';
 import { Input } from '@chakra-ui/input';
-import { Virtuoso } from 'react-virtuoso';
+import { VirtuosoGrid } from 'react-virtuoso';
+import { InfiniteGridItem, InfiniteGridList, NftCard } from '@/components';
 
 function App() {
     const [address, setAddress] = useState<string>();
@@ -20,7 +21,7 @@ function App() {
         isRefetching,
     } = useInfiniteQuery({
         queryKey: ['nfts', address],
-        queryFn: async () => await getNfts(address || '0xDaF288Eea1a696Ecb1DD37a1e6b2A4058a604e7C'),
+        queryFn: async () => await getNfts(address || '0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4'),
         // Don't fetch next query if the address doesn't start with 0x
         getNextPageParam: (lastPage) => lastPage?.next,
         enabled: !address || Boolean(address && address.length === 42 && address.startsWith('0x')),
@@ -32,17 +33,17 @@ function App() {
 
     if (isError) return <div>Error...</div>;
 
-    console.log(data);
+    console.log(data?.pages?.[0]?.assets);
 
     return (
-        <VStack width="100%">
-            <Text variant="3xl">Explore the NFTs owned by a wallet</Text>
+        <VStack width="100%" spacing="space40">
+            <Text variant="3xl">Discover Wallet-Owned NFTs</Text>
             <Input
                 value={address}
                 onChange={(event) => setAddress(event.target.value)}
-                placeholder="0xDaF288Eea1a696Ecb1DD37a1e6b2A4058a604e7C"
+                placeholder="0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4"
             />
-            <Virtuoso
+            <VirtuosoGrid
                 style={{ height: '100%', width: '100%' }}
                 data={data?.pages?.map((page) => page?.assets).flat()}
                 useWindowScroll
@@ -51,23 +52,23 @@ function App() {
                 itemContent={(_, nft) => (
                     <Box
                         key={nft.id}
-                        width="100%"
+                        boxSize="100%"
                         role="button"
-                        onClick={() => setSelectedNft(nft)}
+                        onClick={() => {
+                            setSelectedNft(nft);
+                            window.open(nft.permalink, '_blank');
+                        }}
                     >
-                        {/* <JobCard {...job} /> */}
+                        <NftCard {...nft} />
                     </Box>
                 )}
                 context={{
                     isLoading: hasNextPage || isFetchingNextPage || isRefetching,
                 }}
-                components={
-                    {
-                        // List: InfiniteGridList,
-                        // Item: InfiniteGridItem,
-                        // Footer: InfiniteGridFooter,
-                    }
-                }
+                components={{
+                    List: InfiniteGridList,
+                    Item: InfiniteGridItem,
+                }}
             />
         </VStack>
     );
