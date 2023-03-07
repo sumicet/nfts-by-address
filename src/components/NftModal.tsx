@@ -34,6 +34,10 @@ export function NftModal({
     const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
     const textSecondaryColor = useColorModeValue('text.secondary.light', 'text.secondary.dark');
     const outlineColor = useColorModeValue('outline.light', 'outline.dark');
+    const backgroundPrimaryColor = useColorModeValue(
+        'background.primary.light',
+        'background.primary.dark'
+    );
 
     // Bad conversion, no bueno for production
     // Should've converted to USD but was too lazy
@@ -72,26 +76,50 @@ export function NftModal({
                                 boxSize={500}
                             />
                         </Box>
-                        <Text variant="subtitle" color={textPrimaryColor}>
+                        <Text
+                            variant="subtitle"
+                            color={textPrimaryColor}
+                            noOfLines={2}
+                            wordBreak="break-all"
+                        >
                             {name || `#${token_id}`}
                         </Text>
-                        <HStack
-                            outline="1px solid"
-                            outlineOffset="-1px"
-                            outlineColor={outlineColor}
-                            padding="space12"
-                            borderRadius="radius16"
-                        >
-                            <Image src={collection.image_url} boxSize={30} borderRadius="100%" />
-                            <Text variant="body" color={textSecondaryColor}>
-                                {collection.name}
-                            </Text>
-                            {collection.safelist_request_status === 'verified' && (
-                                <Icon type="verified" boxSize="space16" />
-                            )}
-                        </HStack>
+                        <Link href={`https://opensea.io/collection/${collection.slug}`} isExternal>
+                            <HStack
+                                outline="1px solid"
+                                outlineOffset="-1px"
+                                outlineColor={outlineColor}
+                                _hover={{
+                                    bgColor: backgroundPrimaryColor,
+                                }}
+                                padding="space12"
+                                borderRadius="radius16"
+                            >
+                                <Image
+                                    src={collection.image_url}
+                                    boxSize={30}
+                                    borderRadius="100%"
+                                />
+                                <Text
+                                    variant="body"
+                                    color={textSecondaryColor}
+                                    noOfLines={1}
+                                    wordBreak="break-all"
+                                >
+                                    {collection.name}
+                                </Text>
+                                {collection.safelist_request_status === 'verified' && (
+                                    <Icon type="verified" boxSize="space16" />
+                                )}
+                            </HStack>
+                        </Link>
                         {description && (
-                            <Text variant="body" color={textSecondaryColor} noOfLines={6}>
+                            <Text
+                                variant="body"
+                                color={textSecondaryColor}
+                                noOfLines={6}
+                                wordBreak="break-all"
+                            >
                                 {description}
                             </Text>
                         )}

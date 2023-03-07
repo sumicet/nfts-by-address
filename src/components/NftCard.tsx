@@ -60,11 +60,11 @@ export function NftCard({
                 borderRadius="radius32"
             />
             <VStack spacing="space12" alignItems="flex-start" paddingX="space8">
-                <Text color={textPrimaryColor} noOfLines={1}>
+                <Text color={textPrimaryColor} noOfLines={1} wordBreak="break-all">
                     {name || `#${token_id}`}
                 </Text>
                 <HStack spacing="space4">
-                    <Text color={textSecondaryColor} noOfLines={1}>
+                    <Text color={textSecondaryColor} noOfLines={1} wordBreak="break-all">
                         {collection.name}
                     </Text>
                     {collection.safelist_request_status === 'verified' && (
@@ -76,7 +76,12 @@ export function NftCard({
                         1 listing at {lowestPrice} ETH
                     </Text>
                 ) : (
-                    <Text color={textSecondaryColor} noOfLines={3} variant="small">
+                    <Text
+                        color={textSecondaryColor}
+                        noOfLines={3}
+                        wordBreak="break-all"
+                        variant="small"
+                    >
                         Not for sale
                     </Text>
                 )}

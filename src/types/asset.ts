@@ -12,6 +12,7 @@ export interface Asset {
         name: string;
         safelist_request_status: 'verified' | 'not_requested' | 'disabled_top_trending';
         image_url: string;
+        slug: string;
     };
     token_id: string;
 }
