@@ -30,6 +30,18 @@ module.exports = {
             },
         ],
         'react/jsx-max-depth': ['warn', { max: 6 }],
+        'import/no-unresolved': 'error',
     },
-    ignorePatterns: ['node_modules/', 'dist/', 'build/', '**.d.ts'],
+    ignorePatterns: ['node_modules/', 'dist/', 'build/', '**.d.ts', '**.config.ts'],
+    settings: {
+        'import/parsers': {
+            '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+            typescript: {
+                alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+                project: './tsconfig.json',
+            },
+        },
+    },
 };

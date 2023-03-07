@@ -9,6 +9,13 @@
         "lint": "eslint src"
     },
     "dependencies": {
+        "@chakra-ui/anatomy": "^2.1.2",
+        "@chakra-ui/provider": "^2.1.2",
+        "@chakra-ui/system": "^2.5.1",
+        "@chakra-ui/theme": "^2.2.5",
+        "@emotion/react": "^11.10.6",
+        "@emotion/styled": "^11.10.6",
+        "framer-motion": "^10.2.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
@@ -20,12 +27,14 @@
         "eslint": "^8.35.0",
         "eslint-config-prettier": "^8.7.0",
         "eslint-config-standard-with-typescript": "^34.0.0",
+        "eslint-import-resolver-typescript": "^3.5.3",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-n": "^15.6.1",
         "eslint-plugin-promise": "^6.1.1",
         "eslint-plugin-react": "^7.32.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "typescript": "^4.9.5",
-        "vite": "^4.1.0"
+        "vite": "^4.1.0",
+        "vite-tsconfig-paths": "^4.0.5"
     }
 }
