@@ -97,9 +97,11 @@ export function NftModal({
                         )}
 
                         <HStack width="100%" justifyContent="flex-end" spacing="space24">
-                            <Text variant="body" color="gold">
-                                {lowestPrice} ETH
-                            </Text>
+                            {listingCount && (
+                                <Text variant="body" color="gold">
+                                    {lowestPrice} ETH
+                                </Text>
+                            )}
                             <Link href={permalink} isExternal>
                                 {listingCount ? (
                                     <Button>Buy on Opensea</Button>
