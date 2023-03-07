@@ -23,4 +23,12 @@ export const colors = {
         light: 'rgb(209, 214, 226)',
         dark: 'rgb(35, 43, 57)',
     },
+    search: {
+        light: '#eef1f7',
+        dark: 'rgba(51,54,62,.24)',
+    },
+    error: {
+        light: '#c42d50',
+        dark: '#c42d50',
+    },
 };

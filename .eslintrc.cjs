@@ -31,6 +31,10 @@ module.exports = {
         ],
         'react/jsx-max-depth': ['warn', { max: 6 }],
         'import/no-unresolved': 'error',
+        '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
+        '@typescript-eslint/no-misused-promises': 'off',
+        '@typescript-eslint/promise-function-async': 'off',
     },
     ignorePatterns: ['node_modules/', 'dist/', 'build/', '**.d.ts', '**.config.ts'],
     settings: {
