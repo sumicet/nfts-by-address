@@ -1,7 +1,13 @@
 export const colors = {
     background: {
-        light: '#ffffff',
-        dark: '#070e13',
+        primary: {
+            light: '#ffffff',
+            dark: '#070e13',
+        },
+        secondary: {
+            light: '#eef1f7',
+            dark: '#131820',
+        },
     },
     card: {
         light: 'rgb(238, 241, 247)',
@@ -33,4 +39,10 @@ export const colors = {
         dark: '#c42d50',
     },
     gold: 'rgb(240, 185, 11)',
+    purple: 'rgb(81, 56, 237)',
+    modal: {
+        light: 'linear-gradient(180deg,rgba(238,241,246,0),#eef1f6)',
+        dark: 'linear-gradient(180deg,rgba(19,24,32,0),#131820)',
+    },
+    overlay: 'rgba(0, 0, 0, 0.5)',
 };

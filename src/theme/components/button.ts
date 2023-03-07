@@ -8,5 +8,8 @@ export const Button = defineStyleConfig({
         lineHeight: '1rem',
         fontFamily: 'readexPro',
         fontWeight: 400,
+        bgColor: 'purple',
+        color: 'white',
+        borderRadius: 'radius36',
     },
 });

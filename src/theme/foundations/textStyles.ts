@@ -1,16 +1,16 @@
 import { defineStyle } from '@chakra-ui/system';
 
 export const textStyles = {
-    '5xl': defineStyle({
+    title: defineStyle({
         fontFamily: 'readexPro',
         fontSize: '3rem',
         lineHeight: 1,
         fontWeight: 400,
     }),
-    '3xl': defineStyle({
+    subtitle: defineStyle({
         fontFamily: 'readexPro',
-        fontSize: '1.875rem',
-        lineHeight: '2.25rem',
+        fontSize: '1.5rem',
+        lineHeight: '2rem',
         fontWeight: 400,
     }),
     body: defineStyle({

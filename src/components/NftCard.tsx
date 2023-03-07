@@ -2,10 +2,10 @@ import { type Asset } from '@/types';
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/system';
 import { Icon } from './Icon';
-import { Image } from './Image';
 import convert from 'ether-converter';
+import { NftImage } from './NftImage';
 
-export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collection }: Asset) {
+export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collection, id }: Asset) {
     const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
     const textSecondaryColor = useColorModeValue('text.secondary.light', 'text.secondary.dark');
     const bgColor = useColorModeValue('card.light', 'card.dark');
@@ -46,11 +46,11 @@ export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collec
                 },
             }}
         >
-            <Image
-                src={image_thumbnail_url}
+            <NftImage
                 height={320}
                 width="100%"
-                objectFit="cover"
+                src={image_thumbnail_url}
+                fallback={collection.image_url}
                 borderRadius="radius32"
             />
             <VStack spacing="space12" alignItems="flex-start" paddingX="space8">
@@ -61,7 +61,9 @@ export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collec
                     <Text color={textSecondaryColor} noOfLines={1}>
                         {collection.name}
                     </Text>
-                    <Icon type="verified" boxSize="space16" />
+                    {collection.safelist_request_status === 'verified' && (
+                        <Icon type="verified" boxSize="space16" />
+                    )}
                 </HStack>
                 {listingCount ? (
                     <Text color="gold" noOfLines={3} variant="small">

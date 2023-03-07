@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { getNfts } from '@/utils';
 import { Input } from '@chakra-ui/input';
 import { VirtuosoGrid } from 'react-virtuoso';
-import { InfiniteGridItem, InfiniteGridList, NftCard } from '@/components';
+import { InfiniteGridItem, InfiniteGridList, NftCard, NftModal } from '@/components';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { type Asset } from './types';
 
 function App() {
     const [address, setAddress] = useState<string>();
-    const [selectedNft, setSelectedNft] = useState<any>(null);
+    const [selectedNft, setSelectedNft] = useState<Asset>();
+    const { isOpen, onClose, onOpen } = useDisclosure();
 
     const {
         data,
@@ -21,7 +24,8 @@ function App() {
         isRefetching,
     } = useInfiniteQuery({
         queryKey: ['nfts', address],
-        queryFn: async () => await getNfts(address || '0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4'),
+        queryFn: async ({ pageParam }) =>
+            await getNfts(address || '0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4', pageParam),
         // Don't fetch next query if the address doesn't start with 0x
         getNextPageParam: (lastPage) => lastPage?.next,
         enabled: !address || Boolean(address && address.length === 42 && address.startsWith('0x')),
@@ -33,44 +37,44 @@ function App() {
 
     if (isError) return <div>Error...</div>;
 
-    console.log(data?.pages?.[0]?.assets);
-
     return (
-        <VStack width="100%" spacing="space40">
-            <Text variant="3xl">Discover Wallet-Owned NFTs</Text>
-            <Input
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
-                placeholder="0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4"
-            />
-            <VirtuosoGrid
-                style={{ height: '100%', width: '100%' }}
-                data={data?.pages?.map((page) => page?.assets).flat()}
-                useWindowScroll
-                overscan={0}
-                endReached={() => fetchNextPage()}
-                itemContent={(_, nft) => (
-                    <Box
-                        key={nft.id}
-                        boxSize="100%"
-                        role="button"
-                        onClick={() => {
-                            setSelectedNft(nft);
-                            window.open(nft.permalink, '_blank');
-                        }}
-                    >
-                        <NftCard {...nft} />
-                    </Box>
-                )}
-                context={{
-                    isLoading: hasNextPage || isFetchingNextPage || isRefetching,
-                }}
-                components={{
-                    List: InfiniteGridList,
-                    Item: InfiniteGridItem,
-                }}
-            />
-        </VStack>
+        <>
+            {selectedNft && <NftModal {...selectedNft} isOpen={isOpen} onClose={onClose} />}
+            <VStack width="100%" spacing="space40">
+                <Text variant="title">Wallet-Owned NFTs At Your Sausage Fingertips</Text>
+                <Input
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
+                    placeholder="0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4"
+                />
+                <VirtuosoGrid
+                    style={{ height: '100%', width: '100%' }}
+                    data={data?.pages?.map((page) => page?.assets).flat()}
+                    useWindowScroll
+                    endReached={() => fetchNextPage()}
+                    itemContent={(_, nft) => (
+                        <Box
+                            key={nft.id}
+                            boxSize="100%"
+                            role="button"
+                            onClick={() => {
+                                setSelectedNft(nft);
+                                onOpen();
+                            }}
+                        >
+                            <NftCard {...nft} />
+                        </Box>
+                    )}
+                    context={{
+                        isLoading: hasNextPage || isFetchingNextPage || isRefetching,
+                    }}
+                    components={{
+                        List: InfiniteGridList,
+                        Item: InfiniteGridItem,
+                    }}
+                />
+            </VStack>
+        </>
     );
 }
 
