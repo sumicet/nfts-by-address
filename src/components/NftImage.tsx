@@ -1,5 +1,4 @@
 import { Box, type BoxProps, Center, Text, VStack } from '@chakra-ui/layout';
-import { useColorModeValue } from '@chakra-ui/system';
 import { Image } from './Image';
 
 export function NftImage({
@@ -7,11 +6,11 @@ export function NftImage({
     fallback,
     ...rest
 }: { src: string | null; fallback: string } & BoxProps) {
-    const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
-
     if (src) {
         return <Image src={src} objectFit="cover" {...rest} />;
     }
+
+    // TODO handle no fallback :(
 
     return (
         <Box position="relative" overflow="hidden" {...rest}>
@@ -25,7 +24,7 @@ export function NftImage({
             <Center position="absolute" top={0} boxSize="100%" left={0}>
                 <VStack bgColor="overlay" padding="space14" borderRadius="radius16">
                     <Image src={fallback} boxSize={50} borderRadius="100%" />
-                    <Text color={textPrimaryColor}>Content not available yet.</Text>
+                    <Text color="white">Content not available yet.</Text>
                 </VStack>
             </Center>
         </Box>

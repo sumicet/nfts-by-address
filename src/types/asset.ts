@@ -5,7 +5,7 @@ export interface Asset {
     image_thumbnail_url: string | null;
     image_original_url: string | null;
     image_preview_url: string | null;
-    name: string;
+    name: string | string;
     permalink: string; // Link to Opensea
     seaport_sell_orders: Array<{ current_price: string }> | null;
     collection: {
@@ -13,4 +13,5 @@ export interface Asset {
         safelist_request_status: 'verified' | 'not_requested' | 'disabled_top_trending';
         image_url: string;
     };
+    token_id: string;
 }

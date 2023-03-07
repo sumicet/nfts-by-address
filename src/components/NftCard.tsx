@@ -5,7 +5,13 @@ import { Icon } from './Icon';
 import convert from 'ether-converter';
 import { NftImage } from './NftImage';
 
-export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collection, id }: Asset) {
+export function NftCard({
+    image_thumbnail_url,
+    name,
+    seaport_sell_orders,
+    collection,
+    token_id,
+}: Asset) {
     const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
     const textSecondaryColor = useColorModeValue('text.secondary.light', 'text.secondary.dark');
     const bgColor = useColorModeValue('card.light', 'card.dark');
@@ -55,7 +61,7 @@ export function NftCard({ image_thumbnail_url, name, seaport_sell_orders, collec
             />
             <VStack spacing="space12" alignItems="flex-start" paddingX="space8">
                 <Text color={textPrimaryColor} noOfLines={1}>
-                    {name}
+                    {name || `#${token_id}`}
                 </Text>
                 <HStack spacing="space4">
                     <Text color={textSecondaryColor} noOfLines={1}>

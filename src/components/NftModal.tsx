@@ -28,6 +28,7 @@ export function NftModal({
     seaport_sell_orders,
     permalink,
     collection,
+    token_id,
     ...rest
 }: NftModalProps) {
     const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
@@ -41,7 +42,18 @@ export function NftModal({
         : '0';
     const listingCount = seaport_sell_orders?.length;
 
-    console.log(image_preview_url, image_thumbnail_url);
+    console.log({
+        isOpen,
+        onClose,
+        name,
+        image_preview_url,
+        image_thumbnail_url,
+        description,
+        seaport_sell_orders,
+        permalink,
+        collection,
+        ...rest,
+    });
 
     return (
         <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount>
@@ -61,7 +73,7 @@ export function NftModal({
                             />
                         </Box>
                         <Text variant="subtitle" color={textPrimaryColor}>
-                            {name}
+                            {name || `#${token_id}`}
                         </Text>
                         <HStack
                             outline="1px solid"
@@ -79,7 +91,7 @@ export function NftModal({
                             )}
                         </HStack>
                         {description && (
-                            <Text variant="body" color={textSecondaryColor}>
+                            <Text variant="body" color={textSecondaryColor} noOfLines={6}>
                                 {description}
                             </Text>
                         )}

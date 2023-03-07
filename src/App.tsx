@@ -41,7 +41,9 @@ function App() {
         <>
             {selectedNft && <NftModal {...selectedNft} isOpen={isOpen} onClose={onClose} />}
             <VStack width="100%" spacing="space40">
-                <Text variant="title">Wallet-Owned NFTs At Your Sausage Fingertips</Text>
+                <Text variant="title" textAlign="center">
+                    Wallet-Owned NFTs At Your Sausage Fingertips
+                </Text>
                 <Input
                     value={address}
                     onChange={(event) => setAddress(event.target.value)}
