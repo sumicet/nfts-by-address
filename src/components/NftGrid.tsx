@@ -4,8 +4,9 @@ import { getNfts } from '@/utils';
 import { InfiniteGridList } from './InfiniteGridList';
 import { InfiniteGridItem } from './InfiniteGridItem';
 import { NftCard } from './NftCard';
-import { Box } from '@chakra-ui/layout';
+import { Box, SimpleGrid, Text } from '@chakra-ui/layout';
 import { type Asset } from '@/types';
+import { NftCardSkeleton } from './NftCardSkeleton';
 
 interface NftGridProps {
     onClick: (nft: Asset) => void;
@@ -33,9 +34,21 @@ export function NftGrid({ onClick, address }: NftGridProps) {
 
     // What a messed up bug
     // https://github.com/TanStack/query/issues/3584
-    if (isLoading && fetchStatus !== 'idle') return <div>Loading...</div>;
+    if (isLoading && fetchStatus !== 'idle')
+        return (
+            <SimpleGrid gap="space32" minChildWidth={280} width="100%">
+                {[...Array(10)].map((_, index) => (
+                    <NftCardSkeleton key={index + 1} />
+                ))}
+            </SimpleGrid>
+        );
 
-    if (isError) return <div>Error...</div>;
+    if (isError)
+        return (
+            <Box padding="space24">
+                <Text>Nfts not available at the moment. Please try again later.</Text>
+            </Box>
+        );
 
     return (
         <VirtuosoGrid
@@ -43,9 +56,14 @@ export function NftGrid({ onClick, address }: NftGridProps) {
             data={data?.pages?.map((page) => page?.assets).flat()}
             useWindowScroll
             endReached={() => fetchNextPage()}
-            itemContent={(_, nft) => (
-                <Box key={nft.id} boxSize="100%" role="button" onClick={() => onClick(nft)}>
-                    <NftCard {...nft} />
+            itemContent={(index, nft) => (
+                <Box
+                    key={nft?.id || index}
+                    boxSize="100%"
+                    role="button"
+                    onClick={() => nft && onClick(nft)}
+                >
+                    {nft ? <NftCard {...nft} /> : <NftCardSkeleton />}
                 </Box>
             )}
             context={{

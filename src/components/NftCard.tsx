@@ -50,7 +50,7 @@ export function NftCard({
             }}
         >
             <NftImage
-                height={320}
+                height={{ base: 250, md: 320 }}
                 width="100%"
                 src={image_thumbnail_url}
                 fallback={collection.image_url || placeholder}

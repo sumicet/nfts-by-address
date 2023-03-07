@@ -45,4 +45,8 @@ export const colors = {
         dark: 'linear-gradient(180deg,rgba(19,24,32,0),#131820)',
     },
     overlay: 'rgba(0, 0, 0, 0.5)',
+    skeleton: {
+        light: '#5138ed',
+        dark: '#232b39',
+    },
 };

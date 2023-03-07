@@ -11,7 +11,7 @@ export const InfiniteGridList = forwardRef<HTMLDivElement, ListProps>((props, re
             {...props}
             ref={ref}
             gap="space32"
-            minChildWidth={250}
+            minChildWidth={280}
             width="100%"
             alignItems="flex-start"
         />
