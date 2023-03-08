@@ -28,7 +28,7 @@ export function NftGrid({ onClick, address }: NftGridProps) {
         queryFn: async ({ pageParam }) =>
             await getNfts(address || '0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4', pageParam),
         // Don't fetch next query if the address doesn't start with 0x
-        getNextPageParam: (lastPage) => lastPage?.next,
+        getNextPageParam: (lastPage) => lastPage?.next || undefined,
         enabled: !address || Boolean(address && address.length === 42 && address.startsWith('0x')),
         staleTime: 1000 * 60 * 60, // 1 hour
     });

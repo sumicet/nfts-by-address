@@ -1,5 +1,6 @@
 import { Box, Center, VStack, type CenterProps } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/system';
+import { Footer } from './Footer';
 import { Header } from './Header';
 
 export function Layout({ children, ...rest }: CenterProps) {
@@ -12,6 +13,7 @@ export function Layout({ children, ...rest }: CenterProps) {
                     {children}
                 </Box>
             </Center>
+            <Footer />
         </VStack>
     );
 }
