@@ -1,6 +1,11 @@
 import { type Asset } from '@/types';
 import axios from 'axios';
 
+/**
+ *
+ * @param address The address of the user to get NFTs for
+ * @param cursor The cursor to the next page of results
+ */
 export const getNfts = async (address: string, cursor?: string) => {
     const params = new URLSearchParams();
     params.append('owner', address);
