@@ -37,7 +37,7 @@ export function NftGrid({ onClick, address }: NftGridProps) {
     // https://github.com/TanStack/query/issues/3584
     if (isLoading && fetchStatus !== 'idle') {
         return (
-            <SimpleGrid gap="space32" minChildWidth={280} width="100%">
+            <SimpleGrid gap="space32" columns={{ base: 1, smd: 2, lg: 3, xl: 4 }} width="100%">
                 {[...Array(15)].map((_, index) => (
                     <NftCardSkeleton key={index + 1} />
                 ))}
