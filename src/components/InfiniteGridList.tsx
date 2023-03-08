@@ -2,9 +2,6 @@ import { SimpleGrid } from '@chakra-ui/layout';
 import { forwardRef } from 'react';
 import { type ListProps } from 'react-virtuoso';
 
-/**
- * Used for the Infinite Grid.
- */
 export const InfiniteGridList = forwardRef<HTMLDivElement, ListProps>((props, ref) => {
     return (
         <SimpleGrid

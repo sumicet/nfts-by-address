@@ -86,3 +86,5 @@ export function NftCard({
         </VStack>
     );
 }
+
+NftCard.displayName = 'NftCard';

@@ -34,3 +34,5 @@ export function NftImage({
         </Box>
     );
 }
+
+NftImage.displayName = 'NftImage';

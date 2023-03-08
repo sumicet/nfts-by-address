@@ -145,3 +145,5 @@ export function NftModal({
         </Modal>
     );
 }
+
+NftModal.displayName = 'NftModal';

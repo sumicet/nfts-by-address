@@ -89,3 +89,5 @@ export function NftGrid({ onClick, address }: NftGridProps) {
         />
     );
 }
+
+NftGrid.displayName = 'NftGrid';

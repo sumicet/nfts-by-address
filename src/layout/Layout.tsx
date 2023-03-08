@@ -9,7 +9,7 @@ export function Layout({ children, ...rest }: CenterProps) {
         <VStack boxSize="100%" bgColor={bgColor} {...rest}>
             <Header />
             <Center boxSize="100%">
-                <Box boxSize="100%" maxWidth="1400px" paddingX="2rem">
+                <Box boxSize="100%" maxWidth="container" paddingX="2rem">
                     {children}
                 </Box>
             </Center>

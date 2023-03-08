@@ -6,6 +6,7 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 export function Header() {
     const { colorMode, toggleColorMode } = useColorMode();
     const shadow = useColorModeValue('logo.light', 'logo.dark');
+
     return (
         <HStack justifyContent="space-between" height="header" width="100%" paddingX="space30">
             <Image
