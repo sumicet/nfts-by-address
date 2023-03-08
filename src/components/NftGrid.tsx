@@ -85,6 +85,7 @@ export function NftGrid({ onClick, address }: NftGridProps) {
                 List: InfiniteGridList,
                 Item: InfiniteGridItem,
             }}
+            overscan={30}
         />
     );
 }
