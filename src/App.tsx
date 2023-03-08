@@ -26,7 +26,7 @@ function App() {
             {selectedNft && <NftModal {...selectedNft} isOpen={isOpen} onClose={onClose} />}
             <VStack width="100%" spacing="space40">
                 <Text variant={{ base: 'subtitle', md: 'title' }} textAlign="center">
-                    Wallet-Owned NFTs At Your Sausage Fingertips
+                    Wallet-Owned NFTs At Your Fingertips
                 </Text>
                 <Input
                     value={value}
