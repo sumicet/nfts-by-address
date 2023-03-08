@@ -11,6 +11,16 @@ function App() {
     const [selectedNft, setSelectedNft] = useState<Asset>();
     const { isOpen, onClose, onOpen } = useDisclosure();
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setValue(value);
+
+        // TODO: Would be good to debounce here
+        if ((!value || (value?.startsWith('0x') && value?.length === 42)) && value !== address) {
+            setAddress(value);
+        }
+    };
+
     return (
         <>
             {selectedNft && <NftModal {...selectedNft} isOpen={isOpen} onClose={onClose} />}
@@ -20,15 +30,7 @@ function App() {
                 </Text>
                 <Input
                     value={value}
-                    onChange={(event) => {
-                        const value = event.target.value;
-                        setValue(value);
-
-                        // TODO: Would be good to debounce here
-                        if (!value || (value?.startsWith('0x') && value?.length === 42)) {
-                            setAddress(value);
-                        }
-                    }}
+                    onChange={handleChange}
                     placeholder="Wallet address, eg. 0xFe2E3E999bc785bb053c85688dA6DaA4a19Eb0f4"
                 />
                 <NftGrid

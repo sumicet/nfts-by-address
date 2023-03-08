@@ -30,6 +30,7 @@ export function NftGrid({ onClick, address }: NftGridProps) {
         // Don't fetch next query if the address doesn't start with 0x
         getNextPageParam: (lastPage) => lastPage?.next,
         enabled: !address || Boolean(address && address.length === 42 && address.startsWith('0x')),
+        staleTime: 1000 * 60 * 60, // 1 hour
     });
 
     // What a messed up bug
