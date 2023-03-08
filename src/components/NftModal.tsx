@@ -26,7 +26,6 @@ export function NftModal({
     isOpen,
     onClose,
     name,
-    image_preview_url,
     image_thumbnail_url,
     description,
     seaport_sell_orders,
@@ -63,7 +62,6 @@ export function NftModal({
                 maxHeight={{ base: '100%', sm: '70vh' }}
                 sx={hideScrollbar}
                 overflowY="scroll"
-                // position="relative"
             >
                 <ModalHeader justifyContent="flex-end" display="flex" position="sticky" top={0}>
                     <ModalCloseButton />
