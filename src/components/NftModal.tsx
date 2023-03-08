@@ -18,6 +18,7 @@ import { useBreakpointValue } from '@chakra-ui/media-query';
 import { hideScrollbar } from '@/theme';
 import placeholder from '@/assets/images/placeholder.png';
 import { weiToEth } from '@/utils';
+import { Video } from './Video';
 
 interface NftModalProps extends Pick<ModalProps, 'isOpen' | 'onClose'>, Asset {}
 
@@ -32,7 +33,7 @@ export function NftModal({
     permalink,
     collection,
     token_id,
-    ...rest
+    animation_url,
 }: NftModalProps) {
     const textPrimaryColor = useColorModeValue('text.primary.light', 'text.primary.dark');
     const textSecondaryColor = useColorModeValue('text.secondary.light', 'text.secondary.dark');
@@ -70,17 +71,26 @@ export function NftModal({
 
                 <ModalBody flex={1}>
                     <VStack spacing="space14" alignItems="flex-start" boxSize="100%">
-                        <Box width="100%">
+                        <Box width="100%" position="relative">
                             <AspectRatio
                                 ratio={1}
                                 minWidth="100%"
                                 borderRadius="radius16"
                                 overflow="hidden"
                             >
-                                <NftImage
-                                    src={image_thumbnail_url}
-                                    fallback={collection.image_url}
-                                />
+                                {animation_url ? (
+                                    <Video
+                                        src={animation_url}
+                                        boxSize="100%"
+                                        poster={image_thumbnail_url || undefined}
+                                        objectFit="cover"
+                                    />
+                                ) : (
+                                    <NftImage
+                                        src={image_thumbnail_url}
+                                        fallback={collection.image_url}
+                                    />
+                                )}
                             </AspectRatio>
                         </Box>
                         <Text variant="subtitle" color={textPrimaryColor}>

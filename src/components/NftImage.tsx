@@ -22,7 +22,12 @@ export function NftImage({
             />
             <Center position="absolute" top={0} boxSize="100%" left={0}>
                 <VStack bgColor="overlay" padding="space14" borderRadius="radius16">
-                    <Image src={fallback || placeholder} boxSize={50} borderRadius="100%" />
+                    <Image
+                        src={fallback || placeholder}
+                        boxSize={50}
+                        borderRadius="100%"
+                        objectFit="cover"
+                    />
                     <Text color="white">Content not available yet.</Text>
                 </VStack>
             </Center>

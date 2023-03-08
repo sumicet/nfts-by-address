@@ -15,4 +15,5 @@ export interface Asset {
         slug: string;
     };
     token_id: string;
+    animation_url: string | null;
 }
